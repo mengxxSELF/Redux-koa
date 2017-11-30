@@ -4,6 +4,6 @@ import './index.scss'
 
 export default () => {
   return (
-    <p>魑魅魍魉 李常超 <img src={require('./img/can.jpg')}/> </p>
+    <p>魑魅魍魉 <img src={require('./img/can.jpg')}/> </p>
   )
 }

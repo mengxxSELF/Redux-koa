@@ -1,7 +1,12 @@
 const webpack = require('webpack')
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+
+// 拆开CSS
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const extractCSS = new ExtractTextPlugin('style/[name]-css.css')
+const extractLESS = new ExtractTextPlugin('style/[name]-less.css')
+const extractSCSS = new ExtractTextPlugin('style/[name]-scss.css')
 
 // 通常，在每次构建前清理 /dist 文件夹，是比较推荐的做法，因此只会生成用到的文件。让我们完成这个需求。
 // clean-webpack-plugin 是一个比较普及的管理插件，让我们安装和配置下
@@ -32,18 +37,34 @@ module.exports = {
       // 处理 less 相关
       {
         test: /\.less$/,
-        use: ['style-loader', 'css-loader', 'less-loader']
+        use: extractLESS.extract([ 'css-loader', 'less-loader' ])
+        // use: ['style-loader', 'css-loader', 'less-loader']
       },
       // 处理 sass 相关
       {
         test: /\.scss$/,
-        use: ['style-loader', 'css-loader', 'sass-loader']
+        use: extractSCSS.extract([ 'css-loader', 'sass-loader' ])
+        // use: ['style-loader', 'css-loader', 'sass-loader']
       },
       // 处理css
       {
         test: /\.css$/,
-        include: /node_modules/,
-        use: ['style-loader', 'css-loader']
+        // use: extractCSS.extract([ 'style-loader', 'css-loader', 'postcss-loader'])
+        use: extractCSS.extract([
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+            }
+          },
+          'postcss-loader'
+        ])
+        // use: ExtractTextPlugin.extract({
+        //   fallback: "style-loader",
+        //   use: "css-loader"
+        // })
+        // use: ['style-loader', 'css-loader']
       },
       // 处理图片
       {
@@ -76,6 +97,11 @@ module.exports = {
     }
   },
   plugins: [
+    // CSS样式前缀处理
+    require('autoprefixer'),
+    // require('autoprefixer')({
+    //   browsers: ['last 2 versions', '> 5%', 'last 5 iOS versions', 'Android >= 3']
+    // }),
     // 每次都会清理 pbblic 文件夹的内容
     new CleanWebpackPlugin(
       // ['public'],
@@ -96,7 +122,17 @@ module.exports = {
     }),
     // new webpack.HotModuleReplacementPlugin(),
     // new webpack.optimize.UglifyJsPlugin(),
-    new ExtractTextPlugin('[name].css'),
+
+    // 拆开CSS文件
+    extractCSS,
+    extractLESS,
+    extractSCSS,
+    // new ExtractTextPlugin({
+    //   filename: `[name]-[contenthash:8].css`,
+    //   disable: false, // 禁止使用插件
+    //   allChunks: true // 是否将所有额外的 chunk 都压缩成一个文件
+    // }),
+
     new webpack.optimize.CommonsChunkPlugin({
       name: ['vendor', 'manifest'],
       minChunks: Infinity, // (随着 entry chunk 越来越多， 这个配置保证没其它的模块会打包进 vendor chunk)
