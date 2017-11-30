@@ -3,20 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "PORT=6789 nodemon bin/www",
-    "webpack": "webpack",
-    "server": "PORT=6789 webpack-dev-server --open",
+    "start": "PORT=7070 nodemon bin/www",
+    "webpack": "webpack --watch",
+    "server": "PORT=9090 webpack-dev-server --open --colors",
     "dev": "./node_modules/.bin/nodemon bin/www",
     "prd": "pm2 start bin/www",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "co": "^4.6.0",
-    "co-views": "^2.1.0",
+    "clean-webpack-plugin": "^0.1.17",
     "debug": "^2.6.3",
     "ejs": "^2.5.7",
     "html-webpack-plugin": "^2.30.1",
     "jade": "~1.11.0",
+    "json-loader": "^0.5.7",
     "koa": "^1.4.0",
     "koa-bodyparser": "^2.5.0",
     "koa-ejs": "^4.1.0",
@@ -26,6 +26,7 @@
     "koa-router": "^5.4.0",
     "koa-static": "^1.5.2",
     "koa-views": "^3.1.0",
+    "less-loader": "^4.0.5",
     "react": "^16.1.0",
     "react-dom": "^16.2.0",
     "webpack": "^3.8.1"
@@ -47,9 +48,13 @@
     "babel-register": "~6.9.0",
     "css-loader": "^0.28.7",
     "extract-text-webpack-plugin": "^3.0.2",
+    "file-loader": "^1.1.5",
+    "less": "^2.7.3",
+    "node-sass": "^4.7.2",
     "nodemon": "^1.8.1",
     "postcss-loader": "^2.0.9",
     "react-transform-hmr": "^1.0.4",
+    "sass-loader": "^6.0.6",
     "style-loader": "^0.19.0",
     "webpack-dev-server": "^2.9.5"
   }

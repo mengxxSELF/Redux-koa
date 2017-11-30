@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {render} from 'react-dom'
+import Main from '../component/main.js'
 
 let root = document.getElementById('app')
 
@@ -12,7 +13,7 @@ class Cont extends Component {
   }
   render () {
     return (
-       <div> ppffp </div>
+       <div> <Main /> </div>
     )
   }
 }

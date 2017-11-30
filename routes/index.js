@@ -6,5 +6,17 @@ router.get('/', function *(next) {
   });
 });
 
+router.get('/api/try', function * () {
+  this.body = {
+    code: 9999999999999999999
+  }
+})
+
+router.get('/auth/try', function * () {
+  this.body = {
+    code: 'usersusersusersusersusersusers'
+  }
+})
+
 
 module.exports = router;
