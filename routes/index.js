@@ -1,4 +1,6 @@
-var router = require('koa-router')();
+const router = require('koa-router')()
+const {miaopai} = require('../utils/api.js')
+const req = require('../utils/req.js')
 
 router.get('/', function *(next) {
   yield this.render('index', {
@@ -6,17 +8,24 @@ router.get('/', function *(next) {
   });
 });
 
-router.get('/api/try', function * () {
-  this.body = {
-    code: 9999999999999999999
+// 解析秒拍视频真实地址
+router.get('/miaopai/:cont', function * () {
+  let {cont} = this.params
+  let url = `${miaopai}${cont}`
+  let code
+  let data
+  try {
+    code = 200
+    data = yield req({url}).then(res => res)
+  } catch (e) {
+    code = 500
+    data = []
+  } finally {
+    this.body = {
+      code,
+      data
+    }
   }
 })
-
-router.get('/auth/try', function * () {
-  this.body = {
-    code: 'usersusersusersusersusersusers'
-  }
-})
-
 
 module.exports = router;

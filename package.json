@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "PORT=7070 nodemon bin/www",
+    "start": "PORT=9090 nodemon bin/www",
     "webpack": "rm -rf public; webpack --watch",
     "server": "PORT=9090 webpack-dev-server --open --colors",
     "dev": "./node_modules/.bin/nodemon bin/www",
@@ -11,6 +11,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "antd": "^2.13.10",
+    "babel-plugin-import": "^1.6.2",
     "clean-webpack-plugin": "^0.1.17",
     "debug": "^2.6.3",
     "ejs": "^2.5.7",
@@ -29,6 +31,7 @@
     "less-loader": "^4.0.5",
     "react": "^16.1.0",
     "react-dom": "^16.2.0",
+    "urllib": "^2.25.1",
     "webpack": "^3.8.1"
   },
   "devDependencies": {
@@ -57,6 +60,7 @@
     "react-transform-hmr": "^1.0.4",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.0",
+    "url-loader": "^0.6.2",
     "webpack-dev-server": "^2.9.5"
   }
 }

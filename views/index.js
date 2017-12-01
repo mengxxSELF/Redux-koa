@@ -1,6 +1,10 @@
 import React, {Component} from 'react'
 import {render} from 'react-dom'
-import Main from '../component/main.js'
+import Main from '../container/main.jsx'
+import './index.scss'
+
+// ant design 样式文件
+import 'antd/dist/antd.css'
 
 let root = document.getElementById('app')
 
@@ -12,9 +16,7 @@ class Cont extends Component {
     document.documentElement.style.fontSize = `${screenWidth / designWidth * 100}px`
   }
   render () {
-    return (
-       <div> <Main /> </div>
-    )
+    return <Main />
   }
 }
 
