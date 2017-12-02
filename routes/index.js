@@ -9,14 +9,20 @@ router.get('/', function *(next) {
 });
 
 // 解析秒拍视频真实地址
-router.get('/miaopai/:cont', function * () {
-  let {cont} = this.params
-  let url = `${miaopai}${cont}`
+router.get('/miaopai', function * () {
+  let {video} = this.query
+  let url = `${miaopai}${video}.json`
   let code
   let data
   try {
     code = 200
-    data = yield req({url}).then(res => res)
+    let {result} = yield req({url}).then(res => res) || {}
+    data = result.map(({host, name, path, scheme}) => {
+      return {
+        name,
+        video: `${scheme}${host}${path}`
+      }
+    })
   } catch (e) {
     code = 500
     data = []

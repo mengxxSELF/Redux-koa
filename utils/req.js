@@ -8,7 +8,7 @@ module.exports = ({method = 'GET', url, data}) => {
     .request(url, {dataType: 'json', method})
     .then(function (result) {
       let {data} = result
-      resolve(data.list)
+      resolve(data)
     })
     .catch((err) => {
       console.log('err', err)

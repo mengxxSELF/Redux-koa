@@ -13,13 +13,11 @@ module.exports = {
     })
   },
   miaopai: (cont) => {
-    console.log('cont', cont)
     // 需要解析URL
-    // https://www.miaopai.com/show/RPQhHB4sKzReb9nU0Hi2eoW1utIs6dTomxWcug__.htm
     let reg = /show\/(\S+).htm/
-    let really = reg.exec(cont)
-    // let end = cont.split('/').pop()
-    // let url = `/miaopai/${end}`
+    let video = reg.exec(cont)[1] || null
+    if (!video) return
+    let url = `miaopai?video=${video}`
 
     return new Promise((resolve, reject) => {
       fetch(url)
