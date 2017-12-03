@@ -93,7 +93,7 @@ module.exports = {
       // 处理图片
       {
         test: /\.(gif|png|jpe?g|svg)$/,
-        include: path.resolve(__dirname, 'component'),
+        // include: path.resolve(__dirname, 'component'),
         use: [
           {
             loader: 'file-loader',

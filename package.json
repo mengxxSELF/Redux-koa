@@ -32,7 +32,8 @@
     "react": "^16.1.0",
     "react-dom": "^16.2.0",
     "urllib": "^2.25.1",
-    "webpack": "^3.8.1"
+    "webpack": "^3.8.1",
+    "zeroclipboard": "^2.3.0"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.6",
